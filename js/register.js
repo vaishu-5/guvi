@@ -8,10 +8,11 @@ $(document).ready(function () {
             data: {
                 username:$('#username').val(),
                 email:$('#email').val(),
+                passwords:$('#passwords').val(),
             },
             success: function (response) {
-                alert('Registered Successfully');
-                window.location.href = "profile.html";
+                alert(response);
+                window.location.href = "index.php";
             }
         });
     });

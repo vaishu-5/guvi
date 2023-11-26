@@ -14,11 +14,11 @@ if ($conn->connect_error) {
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $username = $_POST["username"];
+    $passwords = $_POST["passwords"];
     $email = $_POST["email"];
 
     
-    $sql = "SELECT * FROM users WHERE username='$username' AND email='$email'";
+    $sql = "SELECT * FROM users WHERE passwords='$passwords' AND email='$email'";
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
@@ -26,9 +26,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $user = $result->fetch_assoc();
 
         
-        $_SESSION["username"] = $username;
+        $_SESSION["username"] = $user["username"];
         $_SESSION["user_id"] = $user["id"];
         $_SESSION["email"] = $email;
+        $_SESSION["passwords"] = $passwords;
 
 
         
@@ -53,7 +54,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             exit();
         }
     } else {
-        echo "Login failed. Invalid username or email.";
+        echo "Login failed. Invalid username or password.";
     }
 }
 
